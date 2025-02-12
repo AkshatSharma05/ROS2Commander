@@ -1,0 +1,12 @@
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/tuts
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/data/icudtl.dat
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/lib/libflutter_linux_gtk.so
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/data/flutter_assets/AssetManifest.bin
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/data/flutter_assets/kernel_blob.bin
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/data/flutter_assets/version.json
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/data/flutter_assets/NOTICES.Z
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/data/flutter_assets/FontManifest.json
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/data/flutter_assets/shaders/ink_sparkle.frag
+/home/akshat/projects/flutterrospublisher/build/linux/x64/debug/bundle/data/flutter_assets/AssetManifest.json
