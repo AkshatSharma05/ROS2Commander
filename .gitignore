@@ -9,4 +9,4 @@ build/
 # Generated plugin registrant
 **/GeneratedPluginRegistrant.java
 **/GeneratedPluginRegistrant.swift
-.pubspec.lock
+pubspec.lock
