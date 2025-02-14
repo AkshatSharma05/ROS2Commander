@@ -51,3 +51,7 @@ Connect your mobile device to the same network as your ROS2 system.
 - Use the directional buttons to send velocity commands (Twist messages).
 
 - Ensure the ROS2 machine is running rosbridge_server to receive the WebSocket messages.
+
+\
+\
+*This project is licensed under the terms of the MIT license.*
