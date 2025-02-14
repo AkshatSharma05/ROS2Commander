@@ -18,9 +18,9 @@ Ensure you have the following installed:
 
 - Clone the repository:
 
-    ```git clone https://github.com/your-repo/flutter-ros2-commander.git ```
+    ```git clone https://github.com/AkshatSharma05/ROS2Commander.git ```
 
-    ```cd flutter-ros2-commander``` 
+    ```cd ROS2Commander``` 
 
 - Install Flutter dependencies:
 
