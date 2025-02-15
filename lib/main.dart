@@ -16,6 +16,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool useJoystick = false;
+  String selectedTopic = "/cmd_vel";
+  String ipAddress = "192.168.1.1";
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -27,8 +30,6 @@ class _HomeState extends State<Home> {
     double angularVel = 5.0;
 
     late ROSBridgeClient rosClient;
-    String selectedTopic = "/cmd_vel";
-    String ipAddress = "192.168.1.1";
 
     rosClient = ROSBridgeClient(ipAddress); // Change to your ROS2 device IP
 
@@ -60,9 +61,9 @@ class _HomeState extends State<Home> {
     ];
 
     final List<Map<String, double>> velocities = [
-      {"linearX": linearVel, "angularZ": -angularVel}, // Forward left
+      {"linearX": linearVel, "angularZ": angularVel}, // Forward left
       {"linearX": linearVel, "angularZ": 0.0}, // Forward
-      {"linearX": linearVel, "angularZ": angularVel}, // Forward right
+      {"linearX": linearVel, "angularZ": -angularVel}, // Forward right
       {"linearX": 0.0, "angularZ": -angularVel}, // Rotate left
       {"linearX": 0.0, "angularZ": 0.0}, // Stop (center button)
       {"linearX": 0.0, "angularZ": angularVel}, // Rotate right
