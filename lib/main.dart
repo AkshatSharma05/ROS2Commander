@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_joystick/flutter_joystick.dart';
 import 'services/rosbridgeclient.dart';
+import 'widgets/joystickWidget.dart';
+import 'widgets/buttonsWidget.dart';
+import 'widgets/navigationDrawer.dart';
+
 
 void main() => runApp(MaterialApp(
       home: Home(),
@@ -30,72 +33,21 @@ class _HomeState extends State<Home> {
 
     rosClient = ROSBridgeClient(ipAddress); // Change to your ROS2 device IP
 
-    /// Joystick UI
     Widget _buildJoystick() {
-      return Center(
-        child: Joystick(
-          mode: JoystickMode.all,
-          listener: (details) {
-            double linearX = -details.y * linearVel;
-            double angularZ = -details.x * angularVel;
-            rosClient.publish(selectedTopic, linearX, angularZ);
-          },
-        ),
+      return JoystickWidget(
+        linearVel: linearVel,
+        angularVel: angularVel,
+        rosClient: rosClient,
+        selectedTopic: selectedTopic,
       );
     }
 
     Widget _buildButtonGrid() {
-          final List<IconData> icons = [
-      Icons.north_west,
-      Icons.keyboard_arrow_up,
-      Icons.north_east,
-      Icons.keyboard_arrow_left,
-      Icons.stop,
-      Icons.keyboard_arrow_right,
-      Icons.south_west,
-      Icons.keyboard_arrow_down,
-      Icons.south_east,
-    ];
-
-    final List<Map<String, double>> velocities = [
-      {"linearX": linearVel, "angularZ": -angularVel}, // Forward left
-      {"linearX": linearVel, "angularZ": 0.0}, // Forward
-      {"linearX": linearVel, "angularZ": angularVel}, // Forward right
-      {"linearX": 0.0, "angularZ": -angularVel}, // Rotate left
-      {"linearX": 0.0, "angularZ": 0.0}, // Stop (center button)
-      {"linearX": 0.0, "angularZ": angularVel}, // Rotate right
-      {"linearX": -linearVel, "angularZ": -angularVel}, // Backward left
-      {"linearX": -linearVel, "angularZ": 0.0}, // Backward
-      {"linearX": -linearVel, "angularZ": angularVel}, // Backward right
-    ];
-
-      return Align(
-        alignment: Alignment.center,
-        child: GridView.count(
-          crossAxisCount: 3,
-          shrinkWrap: true,
-          // like a for loop
-          children: List.generate(9, (index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () => rosClient.publish(
-                    selectedTopic,
-                    velocities[index]["linearX"]!,
-                    velocities[index]["angularZ"]!),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.lightBlue,
-                  foregroundColor: Colors.white,
-                ),
-                child: Icon(
-                  color: Colors.black,
-                  icons[index],
-                  size: 60.0, // Increase the icon size
-                ),
-              ),
-            );
-          }),
-        ),
+      return ButtonsWidget(
+        linearVel: linearVel,
+        angularVel: angularVel,
+        rosClient: rosClient,
+        selectedTopic: selectedTopic,
       );
     }
 
@@ -228,48 +180,9 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      drawer: const NavigationDrawer(),
+      drawer: const sideBar(),
     );
   }
 }
 
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blueAccent,
-            ),
-            child: Text(
-              'ROS2Commander',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                color: Colors.white,
-                fontSize: 32,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Instructions: \n1. Enter the linear and angular velocities. \n2. Enter the topic name and IP address. \n3. Press the buttons to control the robot. \n4. Make sure the mobile and the host are connected to the same network and rosbridge is running on the host. Command: \n (ros2 launch rosbridge_server rosbridge_websocket_launch.xml address:=0.0.0.0)',
-            ),
-          ),
-          SizedBox(height: 40),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "This project is licensed under the MIT License. \n\n© 2025 Akshat Sharma",
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
