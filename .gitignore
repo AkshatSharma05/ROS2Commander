@@ -6,6 +6,7 @@
 .pub-cache/
 .pub/
 build/
+**/.vscode/
 # Generated plugin registrant
 **/GeneratedPluginRegistrant.java
 **/GeneratedPluginRegistrant.swift
