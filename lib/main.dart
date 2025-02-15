@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:web_socket_channel/io.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_joystick/flutter_joystick.dart';
+import 'services/rosbridgeclient.dart';
 
 void main() => runApp(MaterialApp(
       home: Home(),
@@ -27,8 +25,8 @@ class _HomeState extends State<Home> {
     double angularVel = 5.0;
 
     late ROSBridgeClient rosClient;
-    String selectedTopic = "/cmd_vel";
-    String ipAddress = "192.168.1.1";
+    String selectedTopic = "/cmd_vel"; //default topic
+    String ipAddress = "192.168.1.1"; //default IP
 
     rosClient = ROSBridgeClient(ipAddress); // Change to your ROS2 device IP
 
@@ -70,7 +68,7 @@ class _HomeState extends State<Home> {
       {"linearX": -linearVel, "angularZ": 0.0}, // Backward
       {"linearX": -linearVel, "angularZ": angularVel}, // Backward right
     ];
-    
+
       return Align(
         alignment: Alignment.center,
         child: GridView.count(
@@ -232,32 +230,6 @@ class _HomeState extends State<Home> {
       ),
       drawer: const NavigationDrawer(),
     );
-  }
-}
-
-/// ROS 2 WebSocket Client for rosbridge_server
-class ROSBridgeClient {
-  late WebSocketChannel _channel;
-
-  ROSBridgeClient(String ipAddress, {int port = 9090}) {
-    _channel = IOWebSocketChannel.connect('ws://$ipAddress:$port');
-  }
-
-  void publish(String topic, double linearX, double angularZ) {
-    var message = jsonEncode({
-      "op": "publish",
-      "topic": topic,
-      "msg": {
-        "linear": {"x": linearX, "y": 0.0, "z": 0.0},
-        "angular": {"x": 0.0, "y": 0.0, "z": angularZ}
-      },
-      "type": "geometry_msgs/Twist"
-    });
-    _channel.sink.add(message);
-  }
-
-  void close() {
-    _channel.sink.close();
   }
 }
 
