@@ -57,7 +57,7 @@ Connect your mobile device to the same network as your ROS2 system.
 # Example
 *Click to play the video*
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/XGR663oIk3I/0.jpg)](https://www.youtube.com/watch?v=XGR663oIk3I)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/J3mwRyEzOlI/0.jpg)](https://www.youtube.com/watch?v=J3mwRyEzOlI)
 
 \
 \
